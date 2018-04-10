@@ -40,8 +40,8 @@ namespace CoreVueToDo
         {
             // Add framework services.
             services.AddMvc();
-
-            services.AddSingleton<ITodoItemService, FakeTodoItemService>();
+            
+            services.AddSingleton<ITodoItemService, OktaTodoItemService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
