@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CoreVueToDo.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
@@ -33,6 +34,13 @@ namespace CoreVueToDo
             services.AddMvc();
 
             services.AddSingleton<ITodoItemService, FakeTodoItemService>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = "{{yourOktaOrgUrl}}/oauth2/default";
+                    options.Audience = "api://default";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +63,8 @@ namespace CoreVueToDo
             }
 
             app.UseStaticFiles();
+            
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
