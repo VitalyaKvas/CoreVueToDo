@@ -1,7 +1,5 @@
 # CoreVueToDo
 
-# Asp.NETCore 2.0 Vue 2 Starter - by [DevHelp.Online](http://www.DevHelp.Online)
-
 This repo contains an aspnetcore + Vue.js 2 starter template. The template is based
 on the [Asp.NETCore 2.0 Vue 2 Starter](https://github.com/MarkPieszak/aspnetcore-Vue-starter) 
 
