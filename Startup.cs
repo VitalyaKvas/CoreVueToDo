@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Okta.Sdk;
+using Okta.Sdk.Configuration;
 
 namespace CoreVueToDo
 {
@@ -41,6 +43,12 @@ namespace CoreVueToDo
                     options.Authority = "{{yourOktaOrgUrl}}/oauth2/default";
                     options.Audience = "api://default";
                 });
+
+            services.AddSingleton<IOktaClient>(new OktaClient(new OktaClientConfiguration
+            {
+                OrgUrl = "{{yourOktaOrgUrl}}",
+                Token = Configuration["okta:token"]
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,7 +71,7 @@ namespace CoreVueToDo
             }
 
             app.UseStaticFiles();
-            
+
             app.UseAuthentication();
 
             app.UseMvc(routes =>
